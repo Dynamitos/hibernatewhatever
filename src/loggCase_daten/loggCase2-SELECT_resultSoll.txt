@@ -1,0 +1,4 @@
+header=resultSoll; loggCase=loggCase2-SELECT; caseNote=Single Expression QUERY: SELECT,FROM,WHERE,  Implizites JOIN
+Miete
+Gehalt
+Lotto

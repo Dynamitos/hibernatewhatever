@@ -1,0 +1,9 @@
+header = loggCase; loggCaseid=1; caseNote = Persistenz Testdata; projekt = 1 zu N, Bi-Dir 
+
+header = testdaten
+        Konto k1 = new Konto();
+        Buchung b1 = new Buchung(-120.0, "12.10.2017", "Miete");
+        Buchung b2 = new Buchung(1200.0, "1.2.2016", "Gehalt");
+        
+        Konto k2 = new Konto();
+        Buchung b1k2= new Buchung(1000, "24.12.2016", "Lotto");

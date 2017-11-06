@@ -1,0 +1,4 @@
+header=resultSoll; loggCase=loggCase4-QueryPojo; caseNote=Multiple Expression QUERY: SELECT-NEW  QUERY-POJO
+BuchungQuery{betrag=1200.0, text=Gehalt}
+BuchungQuery{betrag=-120.0, text=Miete}
+BuchungQuery{betrag=1000.0, text=Lotto}

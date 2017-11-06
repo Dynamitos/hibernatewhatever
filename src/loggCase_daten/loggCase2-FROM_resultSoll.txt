@@ -1,0 +1,2 @@
+header=resultSoll; loggCase=loggCase2-FROM; caseNote=Single Expression QUERY: SELECT,FROM,WHERE,  Implizites JOIN
+Buchung{id=1, betrag=-120.0, datum=02.01.2017, text=Miete}, konto=Konto{kontoNr=1, kontoStand=1080.0}}

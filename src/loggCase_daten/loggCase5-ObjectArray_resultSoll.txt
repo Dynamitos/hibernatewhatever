@@ -1,0 +1,4 @@
+header=resultSoll; loggCase=loggCase5-ObjectArray; caseNote=Multiple Select Expression QUERY: SELECT, Object-Array
+Gehalt, 1200.0, 
+Miete, -120.0, 
+Lotto, 1000.0, 

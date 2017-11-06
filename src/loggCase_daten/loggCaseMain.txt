@@ -1,0 +1,27 @@
+header = loggCase; loggCase= loggCaseMain; caseNote = DB Queries testen; projekt = 1 zu N, Bi-Dir 
+
+header = testdaten
+        Konto k1 = new Konto();
+        Buchung b1 = new Buchung(-120.0, "12.10.2017", "Miete");
+        Buchung b2 = new Buchung(1200.0, "1.2.2016", "Gehalt");
+        
+        Konto k2 = new Konto();
+        Buchung b1k2= new Buchung(1000, "24.12.2016", "Lotto");
+
+header=resultSoll; loggCase=loggCase1; caseNote=Testdaten persistieren
+Action: erstelle und persistiere die obigen Testdaten, holle alle persistierten Daten von DB  
+
+header=resultSoll; loggCase=loggCase2-FROM; caseNote=Single Expression QUERY: SELECT,FROM,WHERE,  Implizites JOIN
+Action: alle Buchungen mit text "Miete" von DB holen
+
+header=resultSoll; loggCase=loggCase2-SELECT; caseNote=Single Expression QUERY: SELECT,FROM,WHERE,  Implizites JOIN
+Action: alle Buchungen von DB holen, aber nur das Feld-Element "text" 
+
+header=resultSoll; loggCase=loggCase3-ExplizitJoin; caseNote=Single Expression QUERY: SELECT,FROM,WHERE,  Expliztes JOIN
+Action: alle Buchungen von DB holen, wo der Kontostand von Konto > 1000€ ist 
+
+header=resultSoll; loggCase=loggCase4-QueryPojo; caseNote=Multiple Expression QUERY: SELECT-NEW  QUERY-POJO
+Action: alle Buchungen von DB holen, aber nur die Feld-Elemente betrag und text (Erstelle POJO BuchungQuery )
+
+header=resultSoll; loggCase=loggCase5-ObjectArray; caseNote=Multiple Select Expression QUERY: SELECT, Object-Array
+Action: alle Buchungen von DB holen, aber nur die Feld-Elemente betrag und text (Erstelle ein Objekt-Array )
