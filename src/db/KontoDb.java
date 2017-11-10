@@ -1,42 +1,42 @@
 package db;
 
-import dbUtility.DbAccessBase;
+import dbUtility.DBAccessBase;
 import java.util.List;
 import pojo.Buchung;
 import pojo.Konto;
 
 public class KontoDb {
 
-    private DbAccessBase<Konto> kontoDbAccess;
-    
+    private DBAccessBase<Konto> kontoDbAccess;
+
     public KontoDb() throws Exception {
-        this.kontoDbAccess = new DbAccessBase<>(Konto.class.getName(), Konto.class);
+        this.kontoDbAccess = new DBAccessBase<>(Konto.class.getName(), Konto.class);
     }
-    
+
     public void addTestdaten() throws Exception {
         Konto k1 = new Konto();
-        Buchung b1k1 = new Buchung(-120, "12.10.2017", "Miete");
-        Buchung b2k1 = new Buchung(1200, "01.02.2016", "Gehalt");
-        
+        Buchung b1k1 = new Buchung(-12.45, "12.05.2005", "Miete");
+        Buchung b2k1 = new Buchung(1200.00, "01.06.2006", "Gehalt");
+
         Konto k2 = new Konto();
-        Buchung b1k2 = new Buchung(1000, "24.12.2016", "Lotto");
-        
-        //Verlinken
+        Buchung b1k2 = new Buchung(10000, "24.12.2089", "Lotto");
+
         k1.addBuchung(b1k1);
         k1.addBuchung(b2k1);
-        
         k2.addBuchung(b1k2);
-        
+
         //Persistieren
+        
         add(k1, k2);
     }
-    
-    public void add(Konto... konten) throws Exception {
-        kontoDbAccess.add(konten);
+
+    public void add(Konto... konto) throws Exception {
+        kontoDbAccess.add(konto);
     }
-    
+
     public List<Konto> read() throws Exception {
-        return kontoDbAccess.read();
+        List<Konto> liste = kontoDbAccess.read();
+        return liste;
     }
-    
+
 }

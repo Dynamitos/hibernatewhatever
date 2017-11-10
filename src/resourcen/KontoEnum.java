@@ -10,7 +10,7 @@ public enum KontoEnum {
     public static String getSpalten(char trennzeichen) {
         StringBuilder sb = new StringBuilder();
         for (KontoEnum sp : values()) {
-            sb.append(sp.toString()).append(trennzeichen);
+            sb.append(sp.toString()).append(trennzeichen + " ");
         }
         return sb.toString();
     }

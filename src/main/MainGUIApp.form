@@ -48,7 +48,7 @@
             <Property name="text" type="java.lang.String" value="Add Testdata"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onAddTestdata"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onAddTestdaten"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
@@ -115,6 +115,9 @@
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="onKontoSelected"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
               </AuxValues>
@@ -200,6 +203,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Alle Buchungen"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onAlleBuchungen"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbBuchungen">
           <Properties>

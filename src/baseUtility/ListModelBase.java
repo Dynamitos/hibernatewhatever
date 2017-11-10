@@ -7,7 +7,7 @@ import javax.swing.AbstractListModel;
 public class ListModelBase<T> extends AbstractListModel<T> {
 
     private List<T> liste = new ArrayList<>();
-    
+
     @Override
     public int getSize() {
         return liste.size();
@@ -17,14 +17,17 @@ public class ListModelBase<T> extends AbstractListModel<T> {
     public T getElementAt(int index) {
         return liste.get(index);
     }
-    
-    public void setListe(List<T> liste) throws Exception {
+
+    public void setListe(List<T> liste) {
         this.liste = liste;
-        super.fireContentsChanged(this, 0, liste.size()-1);
+        super.fireContentsChanged(liste, 0, liste.size()-1);
+    }
+
+    public List<T> getListe() {
+        return liste;
     }
     
-    //todo: Model Operationen: delete, change usw.
-
     
+
     
 }

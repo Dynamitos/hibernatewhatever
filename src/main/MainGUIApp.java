@@ -2,38 +2,37 @@ package main;
 
 import baseUtility.ListModelBase;
 import db.KontoDb;
-import dbUtility.DbConnector;
+import dbUtility.DBConnector;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
+import pojo.Buchung;
 import pojo.Konto;
+import resourcen.BuchungEnum;
 import resourcen.KontoEnum;
 
 public class MainGUIApp extends javax.swing.JFrame {
 
     private ListModelBase<Konto> kontoModel;
+    private ListModelBase<Buchung> buchungModel;
     private KontoDb kontoDb;
-    //todo: buchungModel, buchungDB inkl. Klassen
 
     public MainGUIApp() {
-        String status = "GUI Konstruktor";
+        String status = "GUT Main Konstruktor";
+
         try {
-            DbConnector.getInstance().initDb();
-            
-            kontoDb = new KontoDb();
+            DBConnector.getInstance().initDb();
             kontoModel = new ListModelBase<>();
-            
+            buchungModel = new ListModelBase<>();
+            kontoDb = new KontoDb();
             initComponents();
             liKonten.setModel(kontoModel);
             lKontoSpalten.setText(KontoEnum.getSpalten('|'));
+            lBuchungSpalten.setText(BuchungEnum.getSpalten());
         } catch (Exception e) {
             showMessage(status, e, true);
         }
-    }
-    
-    private void showMessage(String status, Exception e, boolean errorTrace) {
-        if(errorTrace) {
-            e.printStackTrace();
-        }
-        JOptionPane.showMessageDialog(this, e.getMessage(), status, JOptionPane.ERROR_MESSAGE);
     }
 
     @SuppressWarnings("unchecked")
@@ -76,7 +75,7 @@ public class MainGUIApp extends javax.swing.JFrame {
         jButton1.setText("Add Testdata");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onAddTestdata(evt);
+                onAddTestdaten(evt);
             }
         });
         jPanel3.add(jButton1);
@@ -103,6 +102,11 @@ public class MainGUIApp extends javax.swing.JFrame {
         jScrollPane1.setMinimumSize(new java.awt.Dimension(132, 132));
 
         liKonten.setBorder(javax.swing.BorderFactory.createTitledBorder("Konten"));
+        liKonten.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                onKontoSelected(evt);
+            }
+        });
         jScrollPane1.setViewportView(liKonten);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -140,6 +144,11 @@ public class MainGUIApp extends javax.swing.JFrame {
         jPanel2.setLayout(new java.awt.GridLayout(5, 2));
 
         jButton2.setText("Alle Buchungen");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onAlleBuchungen(evt);
+            }
+        });
         jPanel2.add(jButton2);
 
         jPanel2.add(cbBuchungen);
@@ -175,19 +184,37 @@ public class MainGUIApp extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void onAddTestdata(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onAddTestdata
+    private void showMessage(String status, Exception e, boolean trace) {
+        if (trace) {
+            e.printStackTrace();
+        }
+        JOptionPane.showMessageDialog(null, e.getMessage(), status, JOptionPane.ERROR_MESSAGE);
+    }
+    private void onAddTestdaten(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onAddTestdaten
         String status = "Add Testdaten";
         try {
-            //DB Aktion
             kontoDb.addTestdaten();
-            //Update Model from DB-Liste
             kontoModel.setListe(kontoDb.read());
-            //Update status
-            lStatus.setText(status);
         } catch (Exception e) {
             showMessage(status, e, true);
         }
-    }//GEN-LAST:event_onAddTestdata
+    }//GEN-LAST:event_onAddTestdaten
+
+    private void onKontoSelected(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_onKontoSelected
+        Konto k = (Konto) liKonten.getSelectedValue();
+        List<Buchung> buchungen = new ArrayList<>(k.getBuchungen());
+        buchungModel.setListe(buchungen);
+        liBuchungen.setModel(buchungModel);
+    }//GEN-LAST:event_onKontoSelected
+
+    private void onAlleBuchungen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onAlleBuchungen
+        cbBuchungen.removeAllItems();
+        for (Konto k : kontoModel.getListe()) {
+            for (Buchung b : k.getBuchungen()) {
+                cbBuchungen.addItem(b.getText());
+            }
+        }
+    }//GEN-LAST:event_onAlleBuchungen
 
     /**
      * @param args the command line arguments

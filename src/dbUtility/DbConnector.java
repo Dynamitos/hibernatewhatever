@@ -5,24 +5,32 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import loggUtility.LoggerUtility;
 
-public class DbConnector {
+public class DBConnector {
 
     private EntityManagerFactory emf = null;
     private EntityManager em = null;
-    
+
     public void initDb() throws Exception {
-        if(emf == null || em == null) {
-            //wenn eienr offen --> beide schließen
+        if (emf == null || em == null) {
+            //NUR wenn einer der beiden offen => dann beide schließen
             closeDb();
         }
-        
-        emf = Persistence.createEntityManagerFactory("PU");
+        //Erzeugen
+        emf = Persistence.createEntityManagerFactory("puVK");
         em = emf.createEntityManager();
         
-        //Logging ACTIVATED!!
+        //Logging
         LoggerUtility.setShow(true);
         LoggerUtility.setWrite(true);
-        
+    }
+
+    public void closeDb() throws Exception {
+        if (em != null) {
+            em.close();
+        }
+        if (emf != null) {
+            emf.close();
+        }
     }
 
     public EntityManagerFactory getEmf() {
@@ -33,25 +41,17 @@ public class DbConnector {
         return em;
     }
     
-    //Singleton
-    private DbConnector() {
-    }
     
-    public static DbConnector getInstance() {
-        return DbConnectorHolder.INSTANCE;
+
+    private DBConnector() {
     }
 
-    public void closeDb() throws Exception{
-        if (em != null) {
-            em.close();
-        }
-        if(emf != null) {
-            emf.close();
-        }
+    public static DBConnector getInstance() {
+        return DBConnectorHolder.INSTANCE;
     }
-    
-    private static class DbConnectorHolder {
 
-        private static final DbConnector INSTANCE = new DbConnector();
+    private static class DBConnectorHolder {
+
+        private static final DBConnector INSTANCE = new DBConnector();
     }
 }
